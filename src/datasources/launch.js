@@ -1,6 +1,6 @@
-const { RESTDataSouce } = require('apollo-datasource-rest');
+const { RESTDataSource } = require('apollo-datasource-rest');
 
-class LaunchAPI extends RESTDataSouce
+class LaunchAPI extends RESTDataSource
 {
   constructor() {
     super();

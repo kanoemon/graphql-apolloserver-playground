@@ -1,15 +1,15 @@
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
 
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world'
-  },
-};
+const LaunchAPI = require('./datasources/launch');
 
 const server = new ApolloServer({
-  typeDefs
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    launchAPI: new LaunchAPI()
+  })
 });
 
 server.listen().then(({ url }) => {
