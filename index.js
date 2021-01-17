@@ -1,46 +1,15 @@
-const { ApolloServer, gql } = require('apollo-server');
-//const typeDefs = require('./schema');
-
-// The GraphQL schema
-const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Author {
-    name: String
-    books: [Book]
-  }
-  
-  type Query {
-    hello: String
-    books: [Book]
-  }
-`;
-
-const books = [
-  {
-    title: 'Cooking',
-    author: 'Suzuki'
-  },
-  {
-    title: 'Tech',
-    author: 'Sato'
-  }
-];
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require('./schema');
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => 'world',
-    books: () => books
+    hello: () => 'world'
   },
 };
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  typeDefs
 });
 
 server.listen().then(({ url }) => {
