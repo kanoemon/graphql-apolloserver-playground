@@ -14,7 +14,7 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     launchAPI: new LaunchAPI(),
-    userAPI: new userAPI(store)
+    userAPI: new userAPI({ store })
   }),
   context: async({ req }) => {
     // auth check

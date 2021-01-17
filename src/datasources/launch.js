@@ -38,7 +38,7 @@ class LaunchAPI extends RESTDataSource
     };
   }
 
-  getLaunchesById({ launchIds }) {
+  async getLaunchesByIds({ launchIds }) {
     return Promise.all(
       launchIds.map(launchId => this.getLaunchById({ launchId })),
     );
