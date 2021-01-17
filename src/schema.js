@@ -2,7 +2,10 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type Query {
-    launches: [Launch]!
+    launches(
+      pageSize: Int
+      after: String
+    ): LaunchConnection!
     launch(id: ID!): Launch
     me: User
   }
@@ -48,6 +51,12 @@ const typeDefs = gql`
     email: String!
     trips: [Launch]!
     token: String
+  }
+
+  type LaunchConnection {
+    cursor: String!
+    hasMore: Boolean!
+    launches: [Launch]!
   }
 `;
 
