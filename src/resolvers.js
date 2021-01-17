@@ -26,6 +26,15 @@ module.exports = {
     me: (_, __, { dataSources }) =>
       dataSources.userAPI.findOrCreateUser()
   },
+  Mutation: {
+    login: async (_, { email }, { dataSources }) => {
+      const user = await dataSources.userAPI.findOrCreateUser({ email });
+      if (user) {
+        user.token = Buffer.from(email).toString('base64');
+        return user;
+      }
+    }
+  },
   // 独自のresolverの設定
   Mission: {
     missionPatch: (mission, { size } = { size: 'LARGE' }) => {
