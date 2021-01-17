@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kanoemon/graphql-apolloserver-playground#readme",
   "dependencies": {
+    "apollo-datasource-rest": "^0.9.7",
     "apollo-server": "^2.19.2",
     "graphql": "^15.4.0",
     "node-dev": "^6.2.0"
