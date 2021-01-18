@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server';
 
-const typeDefs = gql`
+export const typeDefs = gql`
   type Query {
     launches(
       pageSize: Int
@@ -59,5 +59,3 @@ const typeDefs = gql`
     launches: [Launch]!
   }
 `;
-
-module.exports = typeDefs;

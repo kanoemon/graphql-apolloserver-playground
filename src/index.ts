@@ -1,11 +1,11 @@
-const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+import { ApolloServer } from 'apollo-server';
+import { typeDefs } from './schema';
+import { resolvers } from './resolvers';
 const { createStore } = require('./utils');
 const isEmail = require('isemail');
 
-const LaunchAPI = require('./datasources/launch');
-const userAPI = require('./datasources/user');
+import { LaunchAPI } from './datasources/launch';
+import { UserAPI } from './datasources/user';
 
 const store = createStore();
 
@@ -14,7 +14,7 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     launchAPI: new LaunchAPI(),
-    userAPI: new userAPI({ store })
+    userAPI: new UserAPI({ store })
   }),
   context: async({ req }) => {
     // auth check

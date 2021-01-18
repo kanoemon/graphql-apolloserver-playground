@@ -1,6 +1,6 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-class LaunchAPI extends RESTDataSource
+export class LaunchAPI extends RESTDataSource
 {
   constructor() {
     super();
@@ -44,5 +44,3 @@ class LaunchAPI extends RESTDataSource
     );
   }
 }
-
-module.exports = LaunchAPI;

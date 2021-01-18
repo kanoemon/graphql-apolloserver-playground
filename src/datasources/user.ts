@@ -1,7 +1,10 @@
-const { DataSource } = require('apollo-datasource');
+import { DataSource } from 'apollo-datasource';
 const isEmail = require('isemail');
 
-class UserAPI extends DataSource {
+export class UserAPI extends DataSource {
+  store;
+  context;
+
   constructor({ store }) {
     super();
     this.store = store;
@@ -11,7 +14,7 @@ class UserAPI extends DataSource {
     this.context = config.context;
   }
 
-  async findOrCreateUser({ email: emailArg } = {}) {
+  async findOrCreateUser({ email: emailArg } = {email: ''}) {
     const email = this.context && this.context.user
       ? this.context.user.email
       : emailArg;
@@ -69,5 +72,3 @@ class UserAPI extends DataSource {
     return found && found.length > 0;
   }
 }
-
-module.exports = UserAPI;
