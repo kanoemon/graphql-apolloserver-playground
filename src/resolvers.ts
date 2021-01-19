@@ -1,8 +1,9 @@
+import { Resolvers, LaunchConnection, PatchSize, Launch } from './types';
 const { paginateResults } = require('./utils');
 
-export const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
-    launches: async (_, { pageSize = 20, after}, { dataSources }) => {
+    launches: async (_, { pageSize = 20, after}, { dataSources }): Promise<LaunchConnection> => {
       const allLaunches = await dataSources.launchAPI.getAllLaunches();
       allLaunches.reverse();
       
@@ -21,7 +22,7 @@ export const resolvers = {
           : false
       };
     },
-    launch: (_, { id }, { dataSources }) =>
+    launch: (_, { id }, { dataSources }): Launch =>
       dataSources.launchAPI.getLaunchById({ launchId: id }),
     me: (_, __, { dataSources }) =>
       dataSources.userAPI.findOrCreateUser()
@@ -68,10 +69,10 @@ export const resolvers = {
   },
   // 独自のresolverの設定
   Mission: {
-    missionPatch: (mission, { size } = { size: 'LARGE' }) => {
+    missionPatch: (mission, { size } = { size: PatchSize.Large }) => {
       return size === 'SMALL'
-        ? mission.missionPatchSmall
-        : mission.missionPatchLarge;
+        ? PatchSize.Small
+        : PatchSize.Large;
     }
   },
   Launch: {
